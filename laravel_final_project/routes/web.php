@@ -17,3 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/books',[\App\Http\Controllers\BookController::class, 'index']);
+Route::get('/cd', [\App\Http\Controllers\CdController::class, 'index']);

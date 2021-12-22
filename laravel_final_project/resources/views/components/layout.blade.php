@@ -4,29 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Homepage</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <style>
-
-    </style>
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
 </head>
 <body class="antialiased">
 
-<x-header/>
+@include('includes.header')
 
 {{$slot}}
 
-<x-footer/>
+@include('includes.footer')
 
 </body>
 </html>
