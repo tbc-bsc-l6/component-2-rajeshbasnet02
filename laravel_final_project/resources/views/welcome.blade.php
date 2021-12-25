@@ -1,3 +1,3 @@
-<x-layout>
-        Hey man
-</x-layout>
+<x-guest-layout>
+
+</x-guest-layout>
