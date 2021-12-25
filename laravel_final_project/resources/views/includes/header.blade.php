@@ -5,10 +5,10 @@
 
     <nav class="nav">
         <ul class="menu-links flex items-center ">
-            <li class="links mx-6"><a href="">Home</a></li>
+            <li class="links mx-6"><a href="/">Home</a></li>
             <li class="links mx-6"><a href="">Store</a></li>
-            <li class="links mx-6"><a href="">Login</a></li>
-            <li class="links mx-6"><a href="">Register</a></li>
+            <li class="links mx-6"><a href="/login">Login</a></li>
+            <li class="links mx-6"><a href="/register">Register</a></li>
         </ul>
     </nav>
 </header>
