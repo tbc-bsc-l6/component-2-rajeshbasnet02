@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Book;
-use App\Models\Cd;
-use App\Models\Game;
 use App\Models\Product;
+use App\Models\User;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()->count(10)->create();
+        Product::factory(10)->create();
     }
 }
