@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCdsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateCdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cds', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("firstname");
-            $table->string("lastname");
-            $table->string("title");
-            $table->string("duration");
+            $table->string("product_author");
+            $table->string("product_title");
+            $table->string("product_feature");
+            $table->string("pages");
             $table->string("price");
+            $table->foreignId("user_id");
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateCdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cds');
+        Schema::dropIfExists('products');
     }
 }

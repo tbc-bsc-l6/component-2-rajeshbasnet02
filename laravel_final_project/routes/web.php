@@ -26,9 +26,3 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::get("/books", [BookController::class, "index"]);
-Route::get("/cds", [CdController::class, "index"]);
-Route::get("/games", [GameController::class, "index"]);
-
-Route::get("/product", [\App\Http\Controllers\ProductController::class, "index"]);
