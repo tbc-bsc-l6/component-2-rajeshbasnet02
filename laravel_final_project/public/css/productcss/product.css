@@ -7,3 +7,10 @@
 textarea {
     resize: none !important;
 }
+
+
+.individual__product__section__container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 0 2rem;
+}

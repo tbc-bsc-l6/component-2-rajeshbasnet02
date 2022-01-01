@@ -1,4 +1,4 @@
-<header style="height: 10vh" class="flex items-center justify-around">
+<header style="height: 10vh" class="flex items-center justify-around shadow-md">
     <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
         <div x-data="{ open: false }"
              class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">

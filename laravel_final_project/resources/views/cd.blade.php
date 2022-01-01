@@ -66,7 +66,7 @@
                     <br>
 
                     <div class="flex items-baseline justify-end mx-4 mb-6">
-                        <a href="/products/games/{{$game__product->id}}" class="text-gray-500 font-bold flex items-center">
+                        <a href="/products/cds/{{$game__product->id}}" class="text-gray-500 font-bold flex items-center">
                             Explore
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
                                  class="svg-inline--fa fa-chevron-right fa-w-0 w-2 ml-1" role="img"
