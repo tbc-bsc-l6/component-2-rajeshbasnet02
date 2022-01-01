@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string("product_author");
             $table->string("product_title");
             $table->string("product_feature");
-            $table->string("price");
+            $table->integer("price");
             $table->string("product__description");
             $table->timestamps();
         });

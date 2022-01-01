@@ -30,10 +30,11 @@ Route::get("/products", [\App\Http\Controllers\ProductController::class, "create
 Route::post("/products",[\App\Http\Controllers\ProductController::class, "store"]);
 
 //Route model binding
-Route::get("/products/update/{product}", [\App\Http\Controllers\ProductController::class, "edit"]);
+Route::get("/products/update/{id}", [\App\Http\Controllers\ProductController::class, "edit"]);
 Route::post("/products/update/{id}", [\App\Http\Controllers\ProductController::class, "update"]);
 
 
 Route::get("/products/delete/{product}", [\App\Http\Controllers\ProductController::class, "destroy"]);
 
 Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController::class, "show"])->where("category", "books|cds|games");
+Route::get("/products/search/{category}", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game");

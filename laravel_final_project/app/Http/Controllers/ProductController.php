@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Monolog\Logger;
 use function Symfony\Component\String\b;
 
 class ProductController extends Controller
@@ -21,7 +22,7 @@ class ProductController extends Controller
         switch ($slug) {
             case "books" :
                 $books = Category::with("product")->where("product_category", "book")->get();
-                return view("books", compact("books"));
+                return view("book", compact("books"));
 
             case "cds" :
                $cds = Category::with("product")->where("product_category", "cd")->get();
@@ -98,9 +99,9 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        $product = Product::find($product);
+        $product = Product::find($id);
         return view("updateproduct", compact("product"));
     }
 
@@ -144,6 +145,52 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect("/dashboard")->with("delete__product", "Product have been added successfully !");
+
+    }
+
+    public function search(Request $request, $category) {
+
+        $sortWith = "";
+        $sortBy = "";
+
+        switch ($request->category) {
+            case "asc":
+                $sortWith = 'asc';
+                $sortBy = "product_title";
+                break;
+
+            case "desc":
+                $sortWith = 'desc';
+                $sortBy = "product_title";
+                break;
+
+            case "price__high":
+                $sortWith = 'desc';
+                $sortBy = "price";
+                break;
+
+            case "price__low":
+                $sortWith = 'asc';
+                $sortBy = "price";
+                break;
+
+            default :
+                $sortWith = 'asc';
+                $sortBy = "product_title";
+        }
+
+        $category_id = Category::where("product_category", "=",  $category)->first()->id;
+        $products = Product::orderBy($sortBy, $sortWith)->where("category_id", "=", $category_id)->get();
+
+        if($request->search) {
+            $products = $products->filter(function ($prod) use ($request) {
+                return $prod->product_title == $request->search;
+            });
+        }
+
+        return view($category, [
+            "products" => $products
+        ]);
 
     }
 }

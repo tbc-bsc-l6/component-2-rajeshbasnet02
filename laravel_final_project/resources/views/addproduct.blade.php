@@ -32,7 +32,7 @@
         <div class="mt-4">
             <x-label for="price" :value="__('Price')"/>
 
-            <x-input id="price" class="block mt-1 w-full" type="text" name="product__price"
+            <x-input id="price" class="block mt-1 w-full" type="number" name="product__price"
                      :value="old('product__price')" required/>
         </div>
 

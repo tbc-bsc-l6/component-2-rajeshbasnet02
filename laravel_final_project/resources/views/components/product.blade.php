@@ -1,4 +1,4 @@
-<section class="form__section">
+<section class="form__section my-20">
     <div style="height: 80vh; width: 40%;" class="form__container mx-auto flex justify-center items-center">
 
         <form method="POST" action="{{$action ?? "/dashboard"}}" class="w-full bg-gray-50 px-12 py-8 rounded-lg">

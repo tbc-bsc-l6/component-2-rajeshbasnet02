@@ -1,13 +1,14 @@
 <x-guest-layout>
     <x-banner>
         <x-slot name="product_category">
-            {{__("cd")}}
+            {{__("book")}}
         </x-slot>
     </x-banner>
 
+
     <x-search>
         <x-slot name="category">
-            {{__("cd")}}
+            {{__("book")}}
         </x-slot>
     </x-search>
 
@@ -32,12 +33,12 @@
                         </x-slot>
 
                     </x-individual>
-                @endforeach
+        @endforeach
 
 
-            @elseif($cds)
+        @elseif($books)
 
-                @foreach($cds[0]->product as $game__product)
+            @foreach($books[0]->product as $game__product)
                     <x-individual>
                         <x-slot name="title">
                             {{$game__product->product_title}}
@@ -51,7 +52,7 @@
                             {{$game__product->id}}
                         </x-slot>
                     </x-individual>
-        @endforeach
+            @endforeach
 
         @endif
 
