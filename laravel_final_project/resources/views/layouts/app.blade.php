@@ -25,5 +25,7 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="js/vendor.js"></script>
     </body>
 </html>
