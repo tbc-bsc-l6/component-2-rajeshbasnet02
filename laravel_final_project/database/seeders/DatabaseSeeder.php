@@ -8,6 +8,7 @@ use App\Models\User;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +32,15 @@ class DatabaseSeeder extends Seeder
             "product_category" => "game"
         ]);
 
-        Product::factory(10)->create();
+        DB::table("users")->insert([
+            "firstname" => "Rajesh",
+            "lastname" => "Basnet",
+            'email' => "brajesh18@gmail.com",
+            'email_verified_at' => now(),
+            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'remember_token' => Str::random(10),
+        ]);
+
+        Product::factory(300)->create();
     }
 }

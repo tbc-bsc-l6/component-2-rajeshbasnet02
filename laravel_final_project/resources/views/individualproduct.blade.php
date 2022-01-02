@@ -1,12 +1,10 @@
 <x-guest-layout>
 
-
-
     <section class="individual___product__section w-[60%] mx-auto mt-24">
 
         <div class="flex justify-center mb-8">
             <nav class="rounded-md w-full">
-                <ol class="list-reset flex">
+                <ol class="list-reset flex font-bold">
                     <li><a href="/" class="text-blue-600 hover:text-blue-700">Home</a></li>
                     <li><span class="text-gray-500 mx-2">/</span></li>
                     <li><a href="/products/{{$category}}" class="text-blue-600 hover:text-blue-700">{{ucfirst($category)}}</a></li>
@@ -26,7 +24,7 @@
 
                 <p class="font-bold leading-10">Author / Artist : {{$product->product_author}}</p>
 
-                <p class="text-yellow-400 w-32 flex mt-2 mb-6">
+                <p class="text-yellow-400 w-28 flex mt-2 mb-4">
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
                          class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 576 512">
@@ -60,9 +58,9 @@
                 </p>
 
                 <p>{{$product->product__description}}</p>
-                <p class="font-bold text-2xl mt-4 mb-2">Price : ${{$product->price}}</p>
 
-                <div class="end__product__desc flex items-center justify-between">
+                <p class="font-bold text-xl mt-2 mb-2">Price : ${{$product->price}}</p>
+
                     @if($category == "games")
                         <p class="leading-6">Pegi : {{$product->product_feature}}</p>
                     @elseif($category == "cds")
@@ -72,7 +70,6 @@
                     @endif
 
                     <p class="leading-10">Last updated at {{$product->updated_at}}</p>
-                </div>
             </div>
         </div>
 

@@ -20,88 +20,113 @@
     @endif
 
     <section class="list__products__section">
-        <div style="width: 80%" class="list__products__section__container mx-auto mt-10 overflow-x-scroll">
+        <div class="w-[80%] mx-auto">
+            <div class="list__products__section__container mt-10 overflow-x-scroll">
+                <div class="add__products__button w-full flex items-center justify-between">
 
-            <div class="add__products__button w-full flex justify-end">
-                <x-button>
-                    <a href="/products">
-                        {{__("Add Product")}}
-                    </a>
-                </x-button>
-            </div>
+                    <div class="flex justify-center">
+                        <nav class="rounded-md w-full">
+                            <ol class="list-reset flex font-bold">
+                                <li><a href="/" class="text-blue-600 hover:text-blue-700">Home</a></li>
+                                <li><span class="text-gray-500 mx-2">/</span></li>
+                                <li class="text-gray-500">Products</li>
+                            </ol>
+                        </nav>
+                    </div>
 
-            <br>
+                    <x-button>
+                        <a href="/products">
+                            {{__("Add Product")}}
+                        </a>
+                    </x-button>
+                </div>
 
-            <table class="min-w-full">
-                <thead class="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                    <th scope="col" class="py-3 px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Title
-                    </th>
-                    <th scope="col" class="py-3 px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Author
-                    </th>
-                    <th scope="col" class="py-3 px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Price
-                    </th>
-                    <th scope="col" class="py-3 px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Category
-                    </th>
+                <br/>
 
-                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Action
-                    </th>
+                <table class="min-w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Title
+                        </th>
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Author
+                        </th>
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Price
+                        </th>
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Category
+                        </th>
 
-                    <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
-                        Action
-                    </th>
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Action
+                        </th>
 
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Product 1 -->
+                        <th scope="col"
+                            class="py-3 font-bold px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">
+                            Action
+                        </th>
 
-                @foreach($userProd as $prod)
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Product 1 -->
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-700">
-                        <td class="py-4 px-6 text-center text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$prod->product_title}}
-                        </td>
-                        <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$prod->product_author}}
-                        </td>
-                        <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                            ${{$prod->price}}
-                        </td>
-                        <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                            {{strtoupper($prod->category->product_category)}}
-                        </td>
+                    @foreach($userProd as $prod)
 
-                        <td class="py-4 px-6 text-sm font-medium  whitespace-nowrap">
-                                <a href="/products/update/{{$prod->id}}" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 text" fill="none"
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-700">
+                            <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$prod->product_title}}
+                            </td>
+                            <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$prod->product_author}}
+                            </td>
+                            <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+                                ${{$prod->price}}
+                            </td>
+                            <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+                                {{strtoupper($prod->category->product_category)}}
+                            </td>
+
+                            <td class="py-4 px-6 text-sm whitespace-nowrap">
+                                <a href="/products/update/{{$prod->id}}"
+                                   class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 text"
+                                         fill="none"
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </a>
-                        </td>
+                            </td>
 
-                        <td class="py-4 px-6 text-sm font-medium  whitespace-nowrap">
-                            <a href="/products/delete/{{$prod->id}}" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
+                            <td class="py-4 px-6 text-sm whitespace-nowrap">
+                                <a href="/products/delete/{{$prod->id}}"
+                                   class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
 
-                @endforeach
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                </tbody>
-            </table>
+            <br />
+
+            {{$userProd->links()}}
+
         </div>
     </section>
 

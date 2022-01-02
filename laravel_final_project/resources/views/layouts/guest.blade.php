@@ -19,14 +19,17 @@
     </head>
     <body>
 
-        @include('includes.header')
+    @include('includes.header')
 
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
 
-        @include("includes.footer")
+        @if($footer ?? "")
 
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        @else
+            @include("includes.footer")
+        @endif
+
     </body>
 </html>

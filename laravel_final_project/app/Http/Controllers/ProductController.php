@@ -21,15 +21,18 @@ class ProductController extends Controller
     {
         switch ($slug) {
             case "books" :
-                $books = Category::with("product")->where("product_category", "book")->get();
+                $category_id = Category::where("product_category", "=" ,"book")->first()->id;
+                $books = Product::where("category_id", $category_id)->latest()->paginate(12);
                 return view("book", compact("books"));
 
             case "cds" :
-               $cds = Category::with("product")->where("product_category", "cd")->get();
+                $category_id = Category::where("product_category", "=" ,"cd")->first()->id;
+                $cds = Product::where("category_id", $category_id)->latest()->paginate(12);
                 return view("cd", compact("cds"));
 
             case "games" :
-               $games = Category::with("product")->where("product_category", "game")->get();
+                $category_id = Category::where("product_category", "=" ,"game")->first()->id;
+                $games = Product::where("category_id", $category_id)->latest()->paginate(12);
                 return view("game", compact("games"));
 
             default :
@@ -59,7 +62,7 @@ class ProductController extends Controller
             "product__author" => "required|min:5|max:25",
             "product__title" => "required|min:5|max:30",
             "product__feature" => "required",
-            "product__price" => "required",
+            "product__price" => "required|integer",
             "product__desc" => "required|min:10|max:255",
             "product__category" => "required"
         ]);
@@ -118,7 +121,7 @@ class ProductController extends Controller
             "product__author" => "required|min:5|max:25",
             "product__title" => "required|min:5|max:30",
             "product__feature" => "required",
-            "product__price" => "required",
+            "product__price" => "required|integer",
             "product__desc" => "required|min:10|max:255",
         ]);
 
@@ -150,9 +153,6 @@ class ProductController extends Controller
 
     public function search(Request $request, $category) {
 
-        $sortWith = "";
-        $sortBy = "";
-
         switch ($request->category) {
             case "asc":
                 $sortWith = 'asc';
@@ -180,16 +180,20 @@ class ProductController extends Controller
         }
 
         $category_id = Category::where("product_category", "=",  $category)->first()->id;
-        $products = Product::orderBy($sortBy, $sortWith)->where("category_id", "=", $category_id)->get();
+        $products = Product::orderBy($sortBy, $sortWith)->where("category_id", "=", $category_id);
 
-        if($request->search) {
-            $products = $products->filter(function ($prod) use ($request) {
-                return $prod->product_title == $request->search;
-            });
+
+        if($request->product) {
+            $products = $products
+                ->where("product_title", "like", "%" . $request->product . "%")->paginate(12)->appends(request()->query())
+            ;
+        }else {
+            $products = $products->paginate(12)->appends(request()->query());
         }
 
+
         return view($category, [
-            "products" => $products
+            "$category" . "s" => $products
         ]);
 
     }

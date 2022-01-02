@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user_id = Auth::user()->id;
-        $userProd = Product::with("category", "user")->where("user_id", "=", $user_id)->get();
+        $userProd = Product::with("category", "user")->where("user_id", "=", $user_id)->latest()->paginate(8);
         return view('dashboard', compact("userProd"));
     }
 

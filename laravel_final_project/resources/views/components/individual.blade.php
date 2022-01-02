@@ -1,3 +1,5 @@
+@props(['category'])
+
 <div class="individual__product border-2 border-solid border-gray-200 w-full">
 
     <img src="/images/download.png" height="300px" class="object-cover w-full" alt="">
@@ -5,15 +7,15 @@
     <br>
 
     <div class="flex items-baseline justify-between mx-4 ">
-        <p class="text-md font-bold text-gray-700">{{$title}}</p>
+        <p class="text-md font-medium text-gray-700">{{$title}}</p>
         <p class="text-md font-bold text-gray-700">${{$price}}</p>
     </div>
 
     <br>
 
     <div class="flex items-baseline justify-end mx-4 mb-6">
-        <a href="/products/books/{{$product_id}}"
-           class="text-gray-500 font-bold flex items-center">
+        <a href="/products/{{$category}}/{{$product_id}}"
+           class="font-bold flex items-center text-indigo-600">
             Explore
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
                  class="svg-inline--fa fa-chevron-right fa-w-0 w-2 ml-1" role="img"

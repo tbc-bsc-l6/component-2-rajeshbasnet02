@@ -1,24 +1,21 @@
 <x-guest-layout>
-    <x-banner>
-        <x-slot name="product_category">
-            {{__("cd")}}
-        </x-slot>
-    </x-banner>
 
-    <x-search>
-        <x-slot name="category">
-            {{__("cd")}}
-        </x-slot>
-    </x-search>
+    <x-banner :category="__('cd')"/>
 
 
-    <section style="width: 80%" class="products__section mx-auto mt-32">
+    <x-search :category="__('cd')"/>
+
+    <section class="w-[80%] products__section mx-auto mt-14">
+
+        <x-breadcrumb :first="__('Home')" :second="__('Cds')" :third="__('Products')" />
+
+        <br>
+
         <div class="products__section__container grid gap-x-8 gap-y-12">
 
-            @if($products ?? "")
+                @foreach($cds as $game__product)
+                    <x-individual :category="__('cds')">
 
-                @foreach($products as $game__product)
-                    <x-individual>
                         <x-slot name="title">
                             {{$game__product->product_title}}
                         </x-slot>
@@ -34,26 +31,12 @@
                     </x-individual>
                 @endforeach
 
+        </div>
 
-            @elseif($cds)
+        <br/>
+        <br/>
 
-                @foreach($cds[0]->product as $game__product)
-                    <x-individual>
-                        <x-slot name="title">
-                            {{$game__product->product_title}}
-                        </x-slot>
-
-                        <x-slot name="price">
-                            {{$game__product->price}}
-                        </x-slot>
-
-                        <x-slot name="product_id">
-                            {{$game__product->id}}
-                        </x-slot>
-                    </x-individual>
-        @endforeach
-
-        @endif
+        {{$cds->links()}}
 
     </section>
 

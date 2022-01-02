@@ -2,7 +2,6 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
     grid-template-rows: auto;
     gap: 2rem 2.5rem;
-    justify-content: center;
 }
 
 textarea {
@@ -14,4 +13,10 @@ textarea {
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 0 2rem;
+}
+
+
+.homepage__banner {
+    background-image:  url('/images/banner.jpg');
+    background-position: 50% 100%;
 }
