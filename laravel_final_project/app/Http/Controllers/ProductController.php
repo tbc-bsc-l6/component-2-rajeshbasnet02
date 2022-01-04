@@ -88,12 +88,12 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($category, $id)
     {
-        $product = Product::find($id);
-        return view("individualproduct", compact("product", "category"));
+        $products = Product::with("user", "comment")->where("id", $id)->get();
+        return view("individualproduct", compact("products", "category"));
     }
 
     /**

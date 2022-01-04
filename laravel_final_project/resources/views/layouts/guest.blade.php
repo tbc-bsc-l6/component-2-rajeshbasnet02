@@ -16,6 +16,10 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/vendor.js') }}" defer></script>
+
+        <!--Font awesome--->
+        <script src="https://kit.fontawesome.com/962cfbd2be.js" crossorigin="anonymous"></script>
     </head>
     <body>
 
@@ -30,6 +34,8 @@
         @else
             @include("includes.footer")
         @endif
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     </body>
 </html>

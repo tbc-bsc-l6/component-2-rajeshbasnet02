@@ -6,7 +6,3 @@ setTimeout(() =>{
 
 //============================================================================
 
-//Creating dropdown using javascript
-let storeDropDown = document.getElementById("store__dropdown");
-
-storeDropDown.addEventListener("click", )

@@ -1,7 +1,4 @@
-<div id="flash__message" class="pt-6">
-     <div class="max-w-lg mx-auto sm:px-6 lg:px-8">
-         <div class="overflow-hidden shadow-sm sm:rounded-lg">
-             {{$slot}}
-         </div>
-     </div>
- </div>
+<div id="flash__message" {{$attributes->merge(['class' => 'w-[30%] py-4 border-b border-gray-200 font-bold text-center absolute rounded-md top-[13%] right-[10%]'])}}>
+    {{$slot}}
+</div>
+

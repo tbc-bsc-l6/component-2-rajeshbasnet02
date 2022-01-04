@@ -16,7 +16,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            "user_id" => User::first()->id,
+            "user_id" => $this->faker->numberBetween(1, User::all()->count()),
             "category_id" => $this->faker->numberBetween(1, 3),
             "product_author" => $this->faker->name('male'|'female'),
             "product_title" => $this->faker->words($nb=2, $asText = true),

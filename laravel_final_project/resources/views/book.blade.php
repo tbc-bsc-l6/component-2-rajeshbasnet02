@@ -38,7 +38,9 @@
 
         {{$books->links() }}
 
-
     </section>
+
+    <div class="my-12"></div>
+
 
 </x-guest-layout>

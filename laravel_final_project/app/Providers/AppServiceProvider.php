@@ -35,5 +35,13 @@ class AppServiceProvider extends ServiceProvider
         Gate::define("admin", function(User $user) {
            return $user->email === "rajeshbasnet@gmail.com";
         });
+
+        Blade::if("admin", function () {
+            return auth()->user()?->can('admin');
+        });
+
+        Blade::if("cannotadmin", function () {
+            return auth()->user()?->cannot("admin");
+        });
     }
 }

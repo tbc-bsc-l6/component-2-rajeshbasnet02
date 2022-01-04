@@ -126,6 +126,7 @@
       <path value="$PROJECT_DIR$/laravel_final_project/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/laravel_final_project/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/laravel_final_project/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/laravel_final_project/vendor/mailchimp/marketing" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">

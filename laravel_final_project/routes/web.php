@@ -3,7 +3,9 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CdController;
 use App\Http\Controllers\GameController;
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//Mailchimp API for newsletter
+Route::post('/newsletter', function (Newsletter $newsletter) {
+
+    request()->validate(['email' => "required|email"]);
+
+    try {
+
+        $newsletter->subscribe(request('email'));
+
+    } catch (Exception $exception) {
+        throw ValidationException::withMessages([
+            'email' => 'Please, enter a valid email address !'
+        ]);
+    }
+
+    return redirect('/')->with('subscribed', 'Thank you for subscribing our newletter!');
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,7 +48,7 @@ Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController
 Route::get("/products/search/{category}", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game");
 
 
-Route::middleware(["user.access","auth"])->group(function () {
+Route::middleware(["user.access", "auth"])->group(function () {
     Route::get("/products", [\App\Http\Controllers\ProductController::class, "create"]);
     Route::post("/products", [\App\Http\Controllers\ProductController::class, "store"]);
 
@@ -36,7 +58,7 @@ Route::middleware(["user.access","auth"])->group(function () {
     Route::get("/products/delete/{product}", [\App\Http\Controllers\ProductController::class, "destroy"]);
 });
 
-
+Route::post("/products/comment", [\App\Http\Controllers\CommentController::class, 'store'])->middleware("auth");
 Route::get('/dashboard', [\App\Http\Controllers\UserController::class, "index"])->name('dashboard')->middleware("auth");
 
 
