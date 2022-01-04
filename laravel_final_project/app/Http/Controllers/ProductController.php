@@ -93,6 +93,7 @@ class ProductController extends Controller
     public function show($category, $id)
     {
         $products = Product::with("user", "comment")->where("id", $id)->get();
+
         return view("individualproduct", compact("products", "category"));
     }
 
