@@ -46,7 +46,8 @@ class CommentController extends Controller
         $comments = new Comment([
             'user_id' => $user_id,
             'product_id' => $product_id,
-            'comments' => request("product__comment")
+            'comments' => request("product__comment"),
+            "ratings" => request("rating") ?? 0
         ]);
 
         $comments->save();
@@ -92,10 +93,11 @@ class CommentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->back()->with("delete__comment", "deleted");
     }
 }

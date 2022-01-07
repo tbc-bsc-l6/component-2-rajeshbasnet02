@@ -26,14 +26,15 @@
 
                     <p class="font-bold leading-10">Author / Artist : {{$product->product_author}}</p>
 
-
-                    <p class="text-yellow-400 w-28 flex mt-2 mb-4">
-                        <span class="fa fa-star mr[.1rem]"></span>
-                        <span class="fa fa-star mr-[.1rem]"></span>
-                        <span class="fa fa-star mr-[.1rem]"></span>
-                        <span class="fa fa-star mr-[.1rem]"></span>
-                        <span class="fa fa-star"></span>
+                    <p class="text-yellow-400 w-28 mt-2 mb-4">
+                        @for($i = 0; $i < $average_rating; $i++ )
+                            <span class="fa fa-star mr[.25rem]"></span>
+                        @endfor
+                        @for($i = 0; $i < (5 - $average_rating); $i++ )
+                            <span class="far fa-star mr[.25rem]"></span>
+                        @endfor
                     </p>
+
 
                     <p>{{$product->product__description}}</p>
 
@@ -57,7 +58,7 @@
 
             @if(!auth()->user())
                 <p class="login__action__para mb-3">
-                    <a href="/login" class="text-indigo-600">Sign in</a> or <a href="/register"
+                    <a href="{{route("login")}}" class="text-indigo-600">Sign in</a> or <a href={{route("register")}}
                                                                                class="text-indigo-600">Sign
                         up</a> to add comments on
                     this product.
@@ -77,20 +78,37 @@
 
                 <div class="comment__info">
                     <p class="comment__header">{{$product__comment->comments}}</p>
-                    <div>
-                        <img src="/images/avatar.png" alt=""/>
-                        <p>{{$product__comment->user->firstname}}</p>
-                        <p>{{$product__comment->created_at}}</p>
 
-                        @for($i = 0; $i < $product__comment->ratings; $i++)
-                            <span class="text-yellow-400 fa fa-star mr-[.1rem] mb-1"></span>
-                        @endfor
+                    <div class="flex items-center justify-between mt-[1.5rem] px-[1.5rem] py-[1rem] bg-gray-100">
+                        <div class="flex">
+                            <img src="/images/avatar.png" alt=""/>
+                            <p class="text-green-600">{{$product__comment->user->firstname}}</p>
+                            <p class="text-gray-500">{{$product__comment->created_at}}</p>
+                        </div>
 
-                        @for($i = 0; $i < (5-$product__comment->ratings); $i++)
-                            <spn class="text-yellow-400 far fa-star mr-[.1rem] mb-1"></spn>
-                        @endfor
+
+                        <div class="flex">
+                            <p class="text-yellow-400 ml-4">
+                                @for($i = 0; $i < $product__comment->ratings; $i++ )
+                                    <span class="fa fa-star mr[.25rem]"></span>
+                                @endfor
+                                @for($i = 0; $i < (5 - $product__comment->ratings); $i++ )
+                                    <span class="far fa-star mr[.25rem]"></span>
+                                @endfor
+                            </p>
+
+                            <!--substr to remove last character of category because it ends with extra "s" -->
+                            @if(auth()->user()?->can(substr($category, 0, -1) . "admin"))
+                                <form action="/products/comments/{{$product__comment->id}}/delete" method="post">
+                                    @csrf
+                                    @method("delete")
+                                    <button type="submit"><span class="text-red-600 fas fa-trash ml-4 mb-1"></span></button>
+                                </form>
+                            @endif
+                        </div>
 
                     </div>
+
                 </div>
 
                 <br>
@@ -100,7 +118,7 @@
             <br/>
 
             @auth
-                <form action="/products/comment" class="border-2 px-4 py-8" method="post">
+                <form action="{{route("addcomments")}}" class="border-2 px-4 py-8" method="post">
 
                     @csrf
                     <input type="hidden" name="product__id" value="{{$product->id}}"/>
@@ -117,20 +135,21 @@
                     @enderror
 
                     <div class="rating mt-4">
-                        <input type="radio" name="rating" id="rating-5">
+                        <input type="radio" name="rating" id="rating-5" value="5">
                         <label for="rating-5"></label>
-                        <input type="radio" name="rating" id="rating-4">
+                        <input type="radio" name="rating" id="rating-4" value="4">
                         <label for="rating-4"></label>
-                        <input type="radio" name="rating" id="rating-3">
+                        <input type="radio" name="rating" id="rating-3" value="3">
                         <label for="rating-3"></label>
-                        <input type="radio" name="rating" id="rating-2">
+                        <input type="radio" name="rating" id="rating-2" value="2">
                         <label for="rating-2"></label>
-                        <input type="radio" name="rating" id="rating-1">
+                        <input type="radio" name="rating" id="rating-1" value="1">
                         <label for="rating-1"></label>
                     </div>
 
                     <x-button class="block mt-4">Add Comments</x-button>
                 </form>
+
             @endauth
 
         </div>
@@ -138,7 +157,9 @@
     @endforeach
 
     @if(session("comments"))
-        <x-alert class="text-green-600 bg-green-200">{{__("Your comment has been added successfully.")}}</x-alert>
+        <x-alert class="text-green-600 bg-green-200 py-4">{{__("Your comment has been added successfully.")}}</x-alert>
+    @elseif(session("delete__comment"))
+        <x-alert class="text-red-600 bg-red-200 py-4">{{__("Your comment has been deleted successfully.")}}</x-alert>
     @endif
 
 </x-guest-layout>

@@ -33,9 +33,24 @@ class DatabaseSeeder extends Seeder
             "product_category" => "game"
         ]);
 
+
+        //Creating one default user for simplicity
         DB::table("users")->insert([
             "firstname" => "Rajesh",
             "lastname" => "Basnet",
+            'email' => "brajesh18@gmail.com",
+            'email_verified_at' => now(),
+            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'remember_token' => Str::random(10),
+        ]);
+
+
+        //Below are admins
+        DB::table("users")->insert([
+            "firstname" => "Rajesh",
+            "lastname" => "Basnet",
+            'role' => 'admin',
+            'specific_role' => 'superadmin',
             'email' => "rajeshbasnet@gmail.com",
             'email_verified_at' => now(),
             'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
@@ -43,10 +58,36 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+
+
         DB::table("users")->insert([
             "firstname" => "Rajesh",
             "lastname" => "Basnet",
-            'email' => "brajesh18@gmail.com",
+            'role' => 'admin',
+            'specific_role' => 'cdadmin',
+            'email' => "raja@gmail.com",
+            'email_verified_at' => now(),
+            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'remember_token' => Str::random(10),
+        ]);
+
+        DB::table("users")->insert([
+            "firstname" => "Rajesh",
+            "lastname" => "Basnet",
+            'role' => 'admin',
+            'specific_role' => 'bookadmin',
+            'email' => "raju@gmail.com",
+            'email_verified_at' => now(),
+            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'remember_token' => Str::random(10),
+        ]);
+
+        DB::table("users")->insert([
+            "firstname" => "Rajesh",
+            "lastname" => "Basnet",
+            'role' => 'admin',
+            'specific_role' => 'gameadmin',
+            'email' => "ram@gmail.com",
             'email_verified_at' => now(),
             'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
             'remember_token' => Str::random(10),

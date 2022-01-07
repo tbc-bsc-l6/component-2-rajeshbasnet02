@@ -1,4 +1,4 @@
-@props(['desc', 'button'])
+@props(['desc', 'button', 'method'])
 
 <section class="form__section w-full h-[100vh] bg-gray-100">
     <div class="form__container mx-auto flex justify-center items-center h-full w-[50%]">
@@ -8,8 +8,9 @@
                 {{$desc}}
             </p>
 
-            <form method="POST" action="{{$action ?? "/dashboard"}}" >
+            <form method="POST" action="{{$action ?? route("dashboard")}}" >
                 @csrf
+                @method("$method")
 
                 {{$slot}}
 

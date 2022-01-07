@@ -3,10 +3,10 @@
 <section class="search__section mx-auto mt-28 w-[60%]">
     <div class="search__section__container">
 
-        <form action="/products/search/{{$category ?? ""}}" class="flex items-center justify-around">
+        <form action="/products/{{$category ?? ""}}/search" class="flex items-center justify-around">
 
             <div class="search__input basis-1/2">
-                <input type="text" name="product" id="search__product" class="form-input w-full rounded-md border-2 border-gray-300 focus:bg-blue-50 focus:border-50 focus:border">
+                <input type="text" name="product" id="search__product" class="form-input w-full rounded-md border-2 border-gray-300 focus:bg-blue-50 focus:border-50 focus:border" :value="old('product')">
             </div>
 
             <div class="search__categories basis-1/4">

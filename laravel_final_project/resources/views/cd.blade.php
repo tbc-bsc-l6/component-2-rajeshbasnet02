@@ -7,7 +7,7 @@
 
     <section class="w-[80%] products__section mx-auto mt-14">
 
-        <x-breadcrumb :first="__('Home')" :second="__('Cds')" :third="__('Products')" />
+        <x-breadcrumb :first="__('Home')" :second="__('cds')" :third="__('Products')" />
 
         <br>
 

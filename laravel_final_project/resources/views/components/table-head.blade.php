@@ -18,7 +18,7 @@
             {{$fourth}}
         </th>
 
-        @if(auth()->user()?->cannot('admin'))
+        @if(auth()->user()?->cannot('superadmin'))
 
             <th scope="col"
                 class="py-3 font-bold px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-white">

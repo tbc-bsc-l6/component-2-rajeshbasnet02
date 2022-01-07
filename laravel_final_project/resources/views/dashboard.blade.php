@@ -4,26 +4,32 @@
 
         @if(session()->has("login__success"))
 
-            <x-alert class="bg-green-200 text-green-600">
+            <x-alert class="bg-green-200 text-green-600 py-4">
                 {{__("Login Successfull !")}}
+            </x-alert>
+
+        @elseif(session()->has("register__success"))
+
+            <x-alert class="bg-green-200 text-green-600 py-4">
+                {{__("You have been registered successfully !")}}
             </x-alert>
 
         @elseif(session()->has("add__product"))
 
-            <x-alert class="bg-green-200 text-green-600 ">
-                {{__("Product have been added successfully !")}}
+            <x-alert class="bg-green-200 text-green-600 py-4">
+                {{__("Product has been added successfully !")}}
             </x-alert>
 
         @elseif(session()->has("update__product"))
 
-            <x-alert class="bg-green-200 text-green-600 ">
-                {{__("Product have been updated successfully !")}}
+            <x-alert class="bg-green-200 text-green-600 py-4">
+                {{__("Product has been updated successfully !")}}
             </x-alert>
 
         @elseif(session()->has("delete__product"))
 
-            <x-alert class="text-red-600 bg-red-200">
-                {{__("Product have been deleted successfully !")}}
+            <x-alert class="text-red-600 bg-red-200 py-4">
+                {{__("Product has been deleted successfully !")}}
             </x-alert>
 
         @endif
@@ -35,48 +41,69 @@
                     <div class="flex justify-center">
                         <nav class="rounded-md w-full">
                             <ol class="list-reset flex font-bold">
-                                <li><a href="/" class="text-indigo-600 hover:text-indigo-400">Home</a></li>
+                                <li><a href="{{route("homepage")}}" class="text-indigo-600 hover:text-indigo-400">Home</a></li>
                                 <li><span class="text-gray-500 mx-2">/</span></li>
 
-                                @cannotadmin
-                                <li class="text-gray-500">Products</li>
-                                @endcannotadmin
+                                @if(auth()->user()->cannot('admin'))
+                                    @auth
+                                        <li class="text-gray-500">Products</li>
+                                    @endauth
+                                @endif
 
-                                @admin
+                                @cdadmin
+                                <li class="text-gray-500">Cds</li>
+                                @endcdadmin
+
+                                @gameadmin
+                                <li class="text-gray-500">Games</li>
+                                @endgameadmin
+
+                                @bookadmin
+                                <li class="text-gray-500">Books</li>
+                                @endbookadmin
+
+                                @superadmin
                                 <li class="text-gray-500">Users</li>
-                                @endadmin
+                                @endsuperadmin
 
                             </ol>
                         </nav>
                     </div>
 
+
                     @cannotadmin
-                    <x-button>
-                        <a href="/products">
+                        <a href="{{route("addproductspage")}}">
+                            <x-button>
                             {{__("Add Product")}}
+                            </x-button>
                         </a>
-                    </x-button>
                     @endcannotadmin
+
+                    @subadmins
+                    <p class="text-sm"><span class="text-red-600">Admin Note</span> : You can <span
+                            class="text-red-600">update / delete</span> products if there is some <span
+                            class="text-red-600">irregularity</span> in products.</p>
+                    @endsubadmins
 
                 </div>
 
                 <br/>
 
                 <table class="min-w-full">
-                    @admin
+                    @superadmin
                     <x-table-head :first="__('Firstname')" :second="__('Lastname')" :third="__('Email')"
                                   :fourth="__('Created At')"></x-table-head>
-                    @endadmin
+                    @endsuperadmin
 
-                    @cannotadmin
+                    @cannotsuperadmin
                     <x-table-head :first="__('Title')" :second="__('Author')" :third="__('Price')"
                                   :fourth="__('Category')"></x-table-head>
-                    @endcannotadmin
+                    @endcannotsuperadmin
 
 
                     <tbody>
 
-                    @if(auth()->user()?->can('admin'))
+                    @if(auth()->user()?->can('superadmin'))
 
                         @foreach($users as $user)
 
@@ -135,13 +162,13 @@
 
             <br/>
 
-            @admin
+            @superadmin
             {{$users->links()}}
-            @endadmin
+            @endsuperadmin
 
-            @cannotadmin
+            @cannotsuperadmin
             {{$userProd->links()}}
-            @endcannotadmin
+            @endcannotsuperadmin
 
         </div>
     </section>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,27 +13,32 @@ use function Symfony\Component\String\b;
 
 class ProductController extends Controller
 {
+
+    protected function getCategoryId(string $category) {
+        return Category::where("product_category", "=", $category)->first()->id;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index($slug)
+    public function index($category)
     {
-        switch ($slug) {
+        switch ($category) {
             case "books" :
-                $category_id = Category::where("product_category", "=" ,"book")->first()->id;
-                $books = Product::where("category_id", $category_id)->latest()->paginate(12);
+                $category_id = $this->getCategoryId("book");
+                $books = Product::where("category_id", $category_id)->paginate(12);
                 return view("book", compact("books"));
 
             case "cds" :
                 $category_id = Category::where("product_category", "=" ,"cd")->first()->id;
-                $cds = Product::where("category_id", $category_id)->latest()->paginate(12);
+                $cds = Product::where("category_id", $category_id)->latest()->paginate(12);;
                 return view("cd", compact("cds"));
 
             case "games" :
                 $category_id = Category::where("product_category", "=" ,"game")->first()->id;
-                $games = Product::where("category_id", $category_id)->latest()->paginate(12);
+                $games = Product::where("category_id", $category_id)->latest()->paginate(12);;
                 return view("game", compact("games"));
 
             default :
@@ -47,6 +53,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        dd("hey");
         return view("addproduct");
     }
 
@@ -94,7 +101,21 @@ class ProductController extends Controller
     {
         $products = Product::with("user", "comment")->where("id", $id)->get();
 
-        return view("individualproduct", compact("products", "category"));
+        $comments = Comment::all()->where("product_id", $id);
+        $total_num_of_comments = $comments->count();
+        $total_num_of_ratings = 0;
+
+        foreach ($comments as $comment) {
+            $total_num_of_ratings += $comment->ratings;
+        }
+
+        if($total_num_of_ratings > 0 && $total_num_of_comments > 0) {
+            $average_rating = ceil($total_num_of_ratings / $total_num_of_comments);
+        }else {
+            $average_rating = 0;
+        }
+
+        return view("individualproduct", compact("products", "category", "average_rating"));
     }
 
     /**
@@ -114,7 +135,7 @@ class ProductController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function update(Request $request, $id)
     {
@@ -136,7 +157,26 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect("/dashboard")->with("update__product", "Product have been added successfully !");
+        if(auth()->user()?->can('cdadmin')) {
+            $category_id = Category::where("product_category", "cd")->first()->id;
+            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->paginate(8);
+            return view('dashboard', compact("userProd"));
+
+        }else if (auth()->user()?->can('gameadmin')) {
+            $category_id = Category::where("product_category", "game")->first()->id;
+            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->latest()->paginate(8);
+            return view('dashboard', compact("userProd"));
+
+        }else if (auth()->user()?->can('bookadmin')) {
+            $category_id = Category::where("product_category", "book")->first()->id;
+            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->latest()->paginate(8);
+            return view('dashboard', compact("userProd"));
+
+        }else {
+            $user_id = Auth::user()->id;
+            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("user_id", "=", $user_id)->latest()->paginate(8);
+            return view('dashboard', compact("userProd"));
+        }
     }
 
     /**

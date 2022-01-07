@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @superadmin
+                    <x-nav-link :href="route('displayadmins')" :active="request()->routeIs('displayadmins')">
+                        {{ __('Admins') }}
+                    </x-nav-link>
+                    @endsuperadmin
+
                 </div>
             </div>
 
@@ -68,6 +74,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @superadmin
+            <x-responsive-nav-link :href="route('displayadmins')" :active="request()->routeIs('displayadmins')">
+                {{ __('Admins') }}
+            </x-responsive-nav-link>
+            @endsuperadmin
         </div>
 
         <!-- Responsive Settings Options -->

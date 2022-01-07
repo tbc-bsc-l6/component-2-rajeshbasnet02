@@ -24,8 +24,7 @@
             <div class="p-4">
                 <div class="text-sm uppercase text-indigo-600 font-bold">Subscribe us</div>
 
-                <form method="post" action="/newsletter" class="flex mt-4">
-
+                <form method="post" action="{{route("newsletter")}}" class="flex mt-4">
                     @csrf
                     <input style="z-index: 0; outline: none !important;" type="text"
                            class="border-none bg-indigo-100 rounded-xl text-sm" name="email"
@@ -48,7 +47,7 @@
       max-w-screen-lg items-center">
             <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
                 <a href="/#" class="w-6 mx-2">
-                    <svg class="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%"
+                    <svg class="fill-current cursor-pointer text-blue-500" width="100%"
                          height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
@@ -69,7 +68,7 @@
             </svg>
                 </a>
                 <a href="/#" class="w-6 mx-2">
-                    <svg class="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%"
+                    <svg class="fill-current cursor-pointer text-blue-800" width="100%"
                          height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
@@ -81,7 +80,7 @@
             </svg>
                 </a>
                 <a href="/#" class="w-6 mx-2">
-                    <svg class="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%"
+                    <svg class="fill-current cursor-pointer text-red-700" width="100%"
                          height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
@@ -105,7 +104,7 @@
             </svg>
                 </a>
                 <a href="/#" class="w-6 mx-2">
-                    <svg class="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%"
+                    <svg class="fill-current cursor-pointer text-indigo-600" width="100%"
                          height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
@@ -125,19 +124,7 @@
                   0.4,1.5l0,4.5l2.9,0Z"></path>
             </svg>
                 </a>
-                <a href="/#" class="w-6 mx-2">
-                    <svg class="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%"
-                         height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
-                         style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-               <path id="Combined-Shape" d="M12,24c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12c-6.627,0
-                  -12,5.373 -12,12c0,6.627 5.373,12 12,12Zm6.591,-15.556l-0.722,0c-0.189,0
-                  -0.681,0.208 -0.681,0.385l0,6.422c0,0.178 0.492,0.323
-                  0.681,0.323l0.722,0l0,1.426l-4.675,0l0,-1.426l0.935,0l0,-6.655l-0.163,0l-2.251,8.081l-1.742,0l-2.222,-8.081l-0.168,0l0,6.655l0.935,0l0,1.426l-3.74,0l0,-1.426l0.519,0c0.203,0
-                  0.416,-0.145 0.416,-0.323l0,-6.422c0,-0.177 -0.213,-0.385
-                  -0.416,-0.385l-0.519,0l0,-1.426l4.847,0l1.583,5.704l0.042,0l1.598,-5.704l5.021,0l0,1.426Z"></path>
-            </svg>
-                </a>
+
             </div>
             <div class="my-5">Rajesh Basnet © Copyright 2022. All Rights Reserved.</div>
         </div>

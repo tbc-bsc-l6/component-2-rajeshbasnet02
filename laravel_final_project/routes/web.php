@@ -35,31 +35,36 @@ Route::post('/newsletter', function (Newsletter $newsletter) {
     }
 
     return redirect('/')->with('subscribed', 'Thank you for subscribing our newletter!');
-});
+})->name("newsletter");
 
-
+//Homepage
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("homepage");
 
-Route::get("/products/{slug}", [\App\Http\Controllers\ProductController::class, "index"])->where('slug', 'books|cds|games');
-
-Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController::class, "show"])->where("category", "books|cds|games");
-Route::get("/products/search/{category}", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game");
+Route::get("/products/{category}", [\App\Http\Controllers\ProductController::class, "index"])->where('slug', 'books|cds|games')->name("displayproducts");
+Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController::class, "show"])->where("category", "books|cds|games")->name("individualproduct");
+Route::get("/products/{category}/search", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game")->name("searchproducts");
 
 
 Route::middleware(["user.access", "auth"])->group(function () {
-    Route::get("/products", [\App\Http\Controllers\ProductController::class, "create"]);
-    Route::post("/products", [\App\Http\Controllers\ProductController::class, "store"]);
 
-    Route::get("/products/update/{id}", [\App\Http\Controllers\ProductController::class, "edit"]);
-    Route::post("/products/update/{id}", [\App\Http\Controllers\ProductController::class, "update"]);
+    Route::get("/products/add", [\App\Http\Controllers\ProductController::class, "create"])->name("addproductspage");
+    Route::post("/products/add", [\App\Http\Controllers\ProductController::class, "store"])->name("addproducts");
 
-    Route::get("/products/delete/{product}", [\App\Http\Controllers\ProductController::class, "destroy"]);
+    Route::get("/products/{id}/update", [\App\Http\Controllers\ProductController::class, "edit"])->name("updateproductspage");
+    Route::put("/products/{id}/update", [\App\Http\Controllers\ProductController::class, "update"])->name("updateproducts");
+
+    Route::delete("/products/{product}/delete", [\App\Http\Controllers\ProductController::class, "destroy"])->name("deleteproducts");
 });
 
-Route::post("/products/comment", [\App\Http\Controllers\CommentController::class, 'store'])->middleware("auth");
-Route::get('/dashboard', [\App\Http\Controllers\UserController::class, "index"])->name('dashboard')->middleware("auth");
+Route::middleware("auth")->group(function () {
 
+    Route::post("/products/comments/add", [\App\Http\Controllers\CommentController::class, 'store'])->name("addcomments");
+    Route::delete("/products/comments/{comment}/delete", [\App\Http\Controllers\CommentController::class, 'destroy'])->name("deletecomments");
+
+    Route::get('/dashboard', [\App\Http\Controllers\UserController::class, "index"])->name('dashboard');
+    Route::get("/dashboard/admin", [\App\Http\Controllers\UserController::class, "display"])->name("displayadmins");
+});
 
 require __DIR__ . '/auth.php';
