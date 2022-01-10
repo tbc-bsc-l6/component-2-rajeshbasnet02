@@ -1,8 +1,6 @@
 <x-guest-layout>
 
-
-    <x-banner :category="__('book')"/>
-
+    <x-banner :category="__('book')" :description="__('Take a good book to bed with you—books do not snore. Here are some deals !')" :event="__('New Year Deals !')"/>
 
     <x-search :category="__('book')"/>
 
@@ -14,19 +12,23 @@
 
         <div class="products__section__container grid gap-x-8 gap-y-12">
 
-            @foreach($books as $game__product)
+            @foreach($books as $book)
                 <x-individual :category="__('books')">
 
                     <x-slot name="title">
-                        {{$game__product->product_title}}
+                        {{$book->product_title}}
                     </x-slot>
 
                     <x-slot name="price">
-                        {{$game__product->price}}
+                        {{$book->price}}
+                    </x-slot>
+
+                    <x-slot name="image">
+                        {{$book->image}}
                     </x-slot>
 
                     <x-slot name="product_id">
-                        {{$game__product->id}}
+                        {{$book->id}}
                     </x-slot>
 
                 </x-individual>

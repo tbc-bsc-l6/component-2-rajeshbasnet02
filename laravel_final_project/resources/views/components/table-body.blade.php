@@ -1,14 +1,14 @@
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-700">
-    <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+<tr class="bg-white border-b bg-gray-800 border-gray-700 hover:bg-gray-700">
+    <td class="py-4 px-6 text-center text-sm text-gray-200 whitespace-nowrap text-white">
         {{ucwords($title ?? $firstname)}}
     </td>
-    <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+    <td class="py-4 px-6 text-center text-sm text-gray-200 whitespace-nowrap text-white">
         {{$author ?? $lastname}}
     </td>
-    <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+    <td class="py-4 px-6 text-center text-sm text-gray-200 whitespace-nowrap text-white">
         {{$price ?? $email}}
     </td>
-    <td class="py-4 px-6 text-center text-sm text-gray-900 whitespace-nowrap dark:text-white">
+    <td class="py-4 px-6 text-center text-sm text-gray-200 whitespace-nowrap text-white">
         {{strtoupper($category) ?? $date}}
     </td>
 
@@ -16,7 +16,7 @@
 
         <td class="py-4 px-6 text-sm whitespace-nowrap">
             <a href="/products/{{$productid}}/update"
-               class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
+               class="text-blue-600 hover:text-blue-900 text-blue-500 hover:underline">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 text"
                      fill="none"
                      viewBox="0 0 24 24" stroke="currentColor">
@@ -31,7 +31,7 @@
                 @csrf
                 @method("delete")
                 <button type="submit"
-                   class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">
+                   class="text-blue-600 hover:text-blue-900 text-blue-500 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

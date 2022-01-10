@@ -1,7 +1,7 @@
 @props(['first', 'second', 'third'])
 
-<div class="flex justify-center">
-    <nav class="rounded-md w-full">
+<div class="breadcrumb__section flex justify-left">
+    <nav class="rounded-md">
         <ol class="list-reset flex font-bold">
             <li><a href="/" class="text-indigo-600 hover:text-indigo-400">{{$first}}</a></li>
             <li><span class="text-gray-500 mx-2">/</span></li>

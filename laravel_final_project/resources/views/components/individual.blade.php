@@ -1,13 +1,12 @@
 @props(['category'])
 
 <div class="individual__product border-2 border-solid border-gray-200 w-full">
-
-    <img src="/images/download.png" height="300px" class="object-cover w-full" alt="">
+    <img src="{{$image}}" height="300px" class="object-cover w-full" alt="Product Image">
 
     <br>
 
     <div class="flex items-baseline justify-between mx-4 ">
-        <p class="text-md font-medium text-gray-700">{{$title}}</p>
+        <p class="text-md font-medium text-gray-700">{{ucwords($title)}}</p>
         <p class="text-md font-bold text-gray-700">${{$price}}</p>
     </div>
 

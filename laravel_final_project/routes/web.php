@@ -42,11 +42,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name("homepage");
 
-Route::get("/products/{category}", [\App\Http\Controllers\ProductController::class, "index"])->where('slug', 'books|cds|games')->name("displayproducts");
-Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController::class, "show"])->where("category", "books|cds|games")->name("individualproduct");
-Route::get("/products/{category}/search", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game")->name("searchproducts");
-
-
+//User access middleware is defined for restricting super admin to add, update, delete products while he can read though
 Route::middleware(["user.access", "auth"])->group(function () {
 
     Route::get("/products/add", [\App\Http\Controllers\ProductController::class, "create"])->name("addproductspage");
@@ -66,5 +62,11 @@ Route::middleware("auth")->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\UserController::class, "index"])->name('dashboard');
     Route::get("/dashboard/admin", [\App\Http\Controllers\UserController::class, "display"])->name("displayadmins");
 });
+
+//Since, category can be books, cds, or games
+Route::get("/products/{category}", [\App\Http\Controllers\ProductController::class, "index"])->where('slug', 'books|cds|games')->name("displayproducts");
+Route::get("/products/{category}/{id}", [\App\Http\Controllers\ProductController::class, "show"])->where("category", "books|cds|games")->name("individualproduct");
+Route::get("/products/{category}/search", [\App\Http\Controllers\ProductController::class, "search"])->where("category", "book|cd|game")->name("searchproducts");
+
 
 require __DIR__ . '/auth.php';

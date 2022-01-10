@@ -28,7 +28,7 @@ class ProductController extends Controller
         switch ($category) {
             case "books" :
                 $category_id = $this->getCategoryId("book");
-                $books = Product::where("category_id", $category_id)->paginate(12);
+                $books = Product::where("category_id", $category_id)->latest()->paginate(12);
                 return view("book", compact("books"));
 
             case "cds" :
@@ -49,11 +49,10 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        dd("hey");
         return view("addproduct");
     }
 
@@ -61,7 +60,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -122,7 +121,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -157,33 +156,14 @@ class ProductController extends Controller
 
         $product->save();
 
-        if(auth()->user()?->can('cdadmin')) {
-            $category_id = Category::where("product_category", "cd")->first()->id;
-            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->paginate(8);
-            return view('dashboard', compact("userProd"));
-
-        }else if (auth()->user()?->can('gameadmin')) {
-            $category_id = Category::where("product_category", "game")->first()->id;
-            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->latest()->paginate(8);
-            return view('dashboard', compact("userProd"));
-
-        }else if (auth()->user()?->can('bookadmin')) {
-            $category_id = Category::where("product_category", "book")->first()->id;
-            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("category_id", $category_id)->latest()->paginate(8);
-            return view('dashboard', compact("userProd"));
-
-        }else {
-            $user_id = Auth::user()->id;
-            $userProd = Product::with("category", "user")->orderBy("updated_at", "desc")->where("user_id", "=", $user_id)->latest()->paginate(8);
-            return view('dashboard', compact("userProd"));
-        }
+        return redirect("/dashboard")->with("update__product", "");
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Product $product)
     {

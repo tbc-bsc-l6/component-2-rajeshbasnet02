@@ -18,7 +18,7 @@
 
             <div class="individual__product__section__container">
                 <div class="product__image__container w-full">
-                    <img src="/images/download.png" class="object-cover w-full" alt="">
+                    <img src="{{$product->image}}" class="object-cover w-full" alt="Product Image">
                 </div>
 
                 <div class="product__information__container w-full text-gray-700">

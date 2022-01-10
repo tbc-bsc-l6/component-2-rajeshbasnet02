@@ -37,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Defining a gate logic and blade directive for superadmin, and subadmins
+     *
+     * @return void
+     */
     protected function defineGateLogic()
     {
         //admin

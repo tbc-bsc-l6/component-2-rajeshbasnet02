@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             "lastname" => "Basnet",
             'email' => "brajesh18@gmail.com",
             'email_verified_at' => now(),
-            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'password' => bcrypt("test123"),
             'remember_token' => Str::random(10),
         ]);
 
@@ -53,48 +53,47 @@ class DatabaseSeeder extends Seeder
             'specific_role' => 'superadmin',
             'email' => "rajeshbasnet@gmail.com",
             'email_verified_at' => now(),
-            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'password' => bcrypt("test123"),
             'remember_token' => Str::random(10),
         ]);
 
 
 
-
         DB::table("users")->insert([
-            "firstname" => "Rajesh",
-            "lastname" => "Basnet",
+            "firstname" => "Sabin",
+            "lastname" => "Karki",
             'role' => 'admin',
             'specific_role' => 'cdadmin',
-            'email' => "raja@gmail.com",
+            'email' => "sabin@gmail.com",
             'email_verified_at' => now(),
-            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'password' => bcrypt("test123"),
             'remember_token' => Str::random(10),
         ]);
 
         DB::table("users")->insert([
-            "firstname" => "Rajesh",
+            "firstname" => "Utsav",
             "lastname" => "Basnet",
             'role' => 'admin',
             'specific_role' => 'bookadmin',
             'email' => "raju@gmail.com",
             'email_verified_at' => now(),
-            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'password' => bcrypt("test123"),
             'remember_token' => Str::random(10),
         ]);
 
         DB::table("users")->insert([
-            "firstname" => "Rajesh",
-            "lastname" => "Basnet",
+            "firstname" => "Bikas",
+            "lastname" => "Raut",
             'role' => 'admin',
             'specific_role' => 'gameadmin',
-            'email' => "ram@gmail.com",
+            'email' => "bikas@gmail.com",
             'email_verified_at' => now(),
-            'password' => '$2y$10$zr8ZP58Cny2oW4yLaJwj3eT2qT/GV50mRafS2pR1tRZa7WEjDByc6',
+            'password' => bcrypt("test123"),
             'remember_token' => Str::random(10),
         ]);
 
-        User::factory(10)->create();
+        User::factory(100)->create();
         Product::factory(300)->create();
-        Comment::factory(600)->create();
+        Comment::factory(900)->create();
     }
 }

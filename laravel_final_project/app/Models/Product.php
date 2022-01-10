@@ -13,16 +13,31 @@ class Product extends Model
 
     protected $guarded = [];
 
+    /**
+     * Building a relationship since product belongs to user
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Building a relationship since product belongs to category
+     *
+     * @return BelongsTo
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * Setting up relation since Product has many Comment
+     *
+     * @return HasMany
+     */
     public function comment(): HasMany
     {
         return $this->hasMany(Comment::class);
