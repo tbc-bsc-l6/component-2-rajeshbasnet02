@@ -41,7 +41,8 @@
                     <div class="flex justify-center">
                         <nav class="rounded-md w-full">
                             <ol class="list-reset flex font-bold">
-                                <li><a href="{{route("homepage")}}" class="text-indigo-600 hover:text-indigo-400">Home</a></li>
+                                <li><a href="{{route("homepage")}}"
+                                       class="text-indigo-600 hover:text-indigo-400">Home</a></li>
                                 <li><span class="text-gray-500 mx-2">/</span></li>
 
                                 @if(auth()->user()->cannot('admin'))
@@ -70,18 +71,16 @@
                         </nav>
                     </div>
 
-
-                    @superadmin
-                    <p class="text-sm"><span class="text-red-600">Admin Note</span> : You will be given
-                    more functionality to <span class="text-indigo-800">create, delete or update</span> products or users in future.</p>
-                    @endsuperadmin
-
-                    @subadmins
-                    <p class="text-sm"><span class="text-red-600">Admin Note</span> : You can <span
-                            class="text-red-600">update / delete</span> products if there is some <span
-                            class="text-red-600">irregularity</span> in products.</p>
-                    @endsubadmins
-
+                    @auth
+                        <form action="{{route("dashboardsearch")}}" method="get">
+                            <input type="text" id="search" placeholder="Search"
+                                   class="border-indigo-600 px-4"
+                                   name="search">
+                            <button type="submit" class="bg-indigo-500 text-white px-8 py-[0.55rem]">
+                                Search
+                            </button>
+                        </form>
+                    @endauth
                 </div>
 
                 <br/>

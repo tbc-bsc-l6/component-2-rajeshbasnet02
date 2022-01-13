@@ -33,6 +33,15 @@
             @endforeach
         </div>
 
+        @if(count($games) <= 0)
+            <div class="w-full my-8">
+                <div style="width: fit-content" class="bg-indigo-600 py-6 mx-auto px-8 rounded-lg shadow-md">
+                    <p class="text-center text-xl font-bold leading-loose text-gray-100">Oops :(</p>
+                    <p class="text-center text-lg font-bold leading-loose text-gray-100">We cannot find product you are searching for.</p>
+                </div>
+            </div>
+        @endif
+
         <br/>
         <br/>
 
