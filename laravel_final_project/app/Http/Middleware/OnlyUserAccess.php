@@ -17,7 +17,7 @@ class OnlyUserAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role == "superadmin") {
+        if(auth()->user()?->role == "admin") {
             abort(403, 'This Action is Unauthorized');
         }
 

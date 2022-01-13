@@ -212,9 +212,9 @@ class ProductController extends Controller
             $products = $products->paginate(12)->appends(request()->query());
         }
 
-
         return view($category, [
-            "$category" . "s" => $products
+            "$category" . "s" => $products,
+            "count" => count($products)
         ]);
 
     }

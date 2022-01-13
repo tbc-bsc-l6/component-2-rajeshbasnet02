@@ -22,6 +22,12 @@
                     </x-nav-link>
                     @endsuperadmin
 
+                    @cannotadmin
+                    <x-nav-link :href="route('addproductspage')" :active="request()->routeIs('addproductspage')">
+                        {{ __('Add Product') }}
+                    </x-nav-link>
+                    @endcannotadmin
+
                 </div>
             </div>
 
@@ -80,6 +86,12 @@
                 {{ __('Admins') }}
             </x-responsive-nav-link>
             @endsuperadmin
+
+            @cannotadmin
+            <x-nav-link :href="route('addproductspage')" :active="request()->routeIs('addproductspage')">
+                {{ __('Add Product') }}
+            </x-nav-link>
+            @endcannotadmin
         </div>
 
         <!-- Responsive Settings Options -->

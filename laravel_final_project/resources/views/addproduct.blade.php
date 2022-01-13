@@ -2,7 +2,7 @@
 
     <x-slot name="footer"></x-slot>
 
-    <x-product :desc="__('Add your products here')" :button="__('Add Product')" :method="__('post')">
+    <x-product :desc="__('You can add your products here.')" :button="__('Add Product')" :method="__('post')">
 
         <x-slot name="action">
             {{__('/products/add')}}

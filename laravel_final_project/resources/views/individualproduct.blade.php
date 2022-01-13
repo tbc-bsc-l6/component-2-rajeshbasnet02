@@ -97,14 +97,20 @@
                                 @endfor
                             </p>
 
-                            <!--substr to remove last character of category because it ends with extra "s" -->
-                            @if(auth()->user()?->can(substr($category, 0, -1) . "admin"))
-                                <form action="/products/comments/{{$product__comment->id}}/delete" method="post">
-                                    @csrf
-                                    @method("delete")
-                                    <button type="submit"><span class="text-red-600 fas fa-trash ml-4 mb-1"></span></button>
-                                </form>
-                            @endif
+
+                            @auth
+
+
+                                <!--substr to remove last character of category because it ends with extra "s" -->
+                                    @if(auth()->user()?->can(substr($category, 0, -1) . "admin") || auth()->user()->id == $product__comment->user_id)
+                                        <form action="/products/comments/{{$product__comment->id}}/delete" method="post">
+                                            @csrf
+                                            @method("delete")
+                                            <button type="submit"><span class="text-red-600 fas fa-trash ml-4 mb-1"></span></button>
+                                        </form>
+                                    @endif
+                            @endauth
+
                         </div>
 
                     </div>

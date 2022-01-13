@@ -1,10 +1,10 @@
 @props(['desc', 'button', 'method'])
 
 <section class="form__section w-full h-[100vh] bg-gray-100">
-    <div class="form__container mx-auto flex justify-center items-center h-full w-[50%]">
+    <div class="form__container mx-auto flex justify-center items-center h-full w-[40%]">
 
         <div class="addprod__form w-full bg-white px-20 pt-8 rounded-lg">
-            <p class="mb-4 text-right text-blue-600 font-bold uppercase">
+            <p class="mb-4 text-right text-blue-600 font-bold">
                 {{$desc}}
             </p>
 

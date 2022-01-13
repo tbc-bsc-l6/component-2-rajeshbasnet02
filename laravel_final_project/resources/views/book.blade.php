@@ -1,12 +1,14 @@
 <x-guest-layout>
 
-    <x-banner :category="__('book')" :description="__('Take a good book to bed with you—books do not snore. Here are some deals !')" :event="__('New Year Deals !')"/>
+    <x-banner :category="__('book')"
+              :description="__('Take a good book to bed with you—books do not snore. Here are some deals !')"
+              :event="__('New Year Deals !')"/>
 
     <x-search :category="__('book')"/>
 
     <section class="w-[80%] products__section mx-auto mt-14">
 
-        <x-breadcrumb :first="__('Home')" :second="__('books')" :third="__('Products')" />
+        <x-breadcrumb :first="__('Home')" :second="__('books')" :third="__('Products')"/>
 
         <br/>
 
@@ -34,6 +36,15 @@
                 </x-individual>
             @endforeach
         </div>
+
+        @if(count($books) <= 0)
+            <div class="w-full my-8">
+                <div style="width: fit-content" class="bg-indigo-400 py-6 mx-auto px-8 rounded-lg">
+                    <p class="text-center text-xl font-bold leading-loose text-gray-100">Oops :(</p>
+                    <p class="text-center text-lg font-bold leading-loose text-gray-100">We cannot find product you are searching for.</p>
+                </div>
+            </div>
+        @endif
 
         <br/>
         <br/>

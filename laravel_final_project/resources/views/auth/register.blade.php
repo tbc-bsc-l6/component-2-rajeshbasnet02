@@ -13,7 +13,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-        <p class="mb-4 text-right text-blue-600 font-bold uppercase">Register your account </p>
+        <p class="mb-4 text-right text-blue-600 font-bold">Register your account </p>
 
         <form method="POST" action="{{ route('register') }}">
         @csrf

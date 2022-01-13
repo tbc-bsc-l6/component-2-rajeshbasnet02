@@ -70,13 +70,6 @@
                         </nav>
                     </div>
 
-                    @cannotadmin
-                        <a href="{{route("addproductspage")}}">
-                            <x-button>
-                            {{__("Add Product")}}
-                            </x-button>
-                        </a>
-                    @endcannotadmin
 
                     @superadmin
                     <p class="text-sm"><span class="text-red-600">Admin Note</span> : You will be given
